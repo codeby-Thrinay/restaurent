@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useLanguageStore } from '@/store/useLanguageStore';
 import { CreditCard, Banknote, QrCode, X, CheckCircle2, Receipt } from 'lucide-react';
 
 interface RequestBillModalProps {
@@ -11,6 +12,7 @@ interface RequestBillModalProps {
 }
 
 export default function RequestBillModal({ isOpen, onClose, tableId, totalAmount }: RequestBillModalProps) {
+  const { t } = useLanguageStore();
   const [paymentMethod, setPaymentMethod] = useState<'CARD' | 'CASH' | 'UPI'>('CARD');
   const [splitCount, setSplitCount] = useState<number>(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -34,6 +36,7 @@ export default function RequestBillModal({ isOpen, onClose, tableId, totalAmount
         onClose();
       }, 2000);
     } catch (err) {
+      console.error('Bill request error', err);
       alert('Could not request bill. Please try again.');
     } finally {
       setIsSubmitting(false);
@@ -55,9 +58,9 @@ export default function RequestBillModal({ isOpen, onClose, tableId, totalAmount
         {requestSent ? (
           <div className="text-center py-6 space-y-3">
             <CheckCircle2 className="w-12 h-12 text-amber-400 mx-auto animate-bounce" />
-            <h3 className="text-lg font-bold text-amber-400">Bill Requested!</h3>
+            <h3 className="text-lg font-bold text-amber-400">{t('billRequested')}</h3>
             <p className="text-xs text-zinc-400">
-              The server is bringing your printed receipt. Total due: <strong>${totalAmount.toFixed(2)}</strong>
+              {t('serverBringingBill')} <strong>${totalAmount.toFixed(2)}</strong>
             </p>
           </div>
         ) : (
@@ -67,20 +70,20 @@ export default function RequestBillModal({ isOpen, onClose, tableId, totalAmount
                 <Receipt className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-bold text-base">Request Table Bill</h3>
-                <p className="text-xs text-zinc-400">Select payment method & optional split</p>
+                <h3 className="font-bold text-base">{t('requestTableBill')}</h3>
+                <p className="text-xs text-zinc-400">{t('selectPayment')}</p>
               </div>
             </div>
 
             {/* Total summary */}
             <div className="p-3 bg-zinc-950 rounded-xl border border-zinc-800/80 flex items-center justify-between">
-              <span className="text-xs text-zinc-400 font-medium">Total Bill Amount</span>
+              <span className="text-xs text-zinc-400 font-medium">{t('totalBillAmount')}</span>
               <span className="text-xl font-black text-amber-400">${totalAmount.toFixed(2)}</span>
             </div>
 
             {/* Split bill calculator */}
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-zinc-400">Split Bill (Persons)</label>
+              <label className="text-xs font-semibold text-zinc-400">{t('splitBill')}</label>
               <div className="flex items-center justify-between bg-zinc-950 p-2 rounded-xl border border-zinc-800">
                 <div className="flex items-center gap-2">
                   <button
@@ -98,26 +101,26 @@ export default function RequestBillModal({ isOpen, onClose, tableId, totalAmount
                   </button>
                 </div>
                 <span className="text-xs text-zinc-300 font-semibold">
-                  ${perPerson.toFixed(2)} <span className="text-zinc-500 font-normal">/ person</span>
+                  ${perPerson.toFixed(2)} <span className="text-zinc-500 font-normal">/ {t('person')}</span>
                 </span>
               </div>
             </div>
 
             {/* Payment Method Selector */}
             <div className="space-y-2">
-              <label className="text-xs font-semibold text-zinc-400">Payment Option</label>
+              <label className="text-xs font-semibold text-zinc-400">{t('paymentOption')}</label>
               <div className="grid grid-cols-3 gap-2">
                 {[
-                  { id: 'CARD', label: 'Card / POS', icon: CreditCard },
-                  { id: 'CASH', label: 'Cash on Table', icon: Banknote },
-                  { id: 'UPI', label: 'UPI / QR', icon: QrCode },
+                  { id: 'CARD', label: t('cardPos'), icon: CreditCard },
+                  { id: 'CASH', label: t('cashOnTable'), icon: Banknote },
+                  { id: 'UPI', label: t('upiQr'), icon: QrCode },
                 ].map((pm) => {
                   const Icon = pm.icon;
                   const isSelected = paymentMethod === pm.id;
                   return (
                     <button
                       key={pm.id}
-                      onClick={() => setPaymentMethod(pm.id as any)}
+                      onClick={() => setPaymentMethod(pm.id as 'CARD' | 'CASH' | 'UPI')}
                       className={`p-2.5 rounded-xl border text-center transition-all flex flex-col items-center gap-1 ${
                         isSelected
                           ? 'bg-amber-500/10 border-amber-500/50 text-amber-400 font-bold'
@@ -138,7 +141,7 @@ export default function RequestBillModal({ isOpen, onClose, tableId, totalAmount
               className="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-sm transition-all shadow-md shadow-amber-500/20 flex items-center justify-center gap-2 disabled:opacity-50"
             >
               <Receipt className="w-4 h-4" />
-              <span>{isSubmitting ? 'Requesting...' : 'Request Printed Bill'}</span>
+              <span>{isSubmitting ? t('requesting') : t('requestPrintedBill')}</span>
             </button>
           </>
         )}

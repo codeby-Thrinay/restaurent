@@ -2,18 +2,20 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { UtensilsCrossed, ChefHat, UserCheck, Settings, BarChart3, QrCode } from 'lucide-react';
+import { UtensilsCrossed, ChefHat, UserCheck, Settings, BarChart3, QrCode, Globe } from 'lucide-react';
+import { useLanguageStore } from '@/store/useLanguageStore';
 
 export default function NavigationHeader() {
   const pathname = usePathname();
+  const { language, setLanguage, t } = useLanguageStore();
 
   const links = [
-    { name: 'Customer Menu (Table 1)', href: '/table/1', icon: UtensilsCrossed, badge: 'QR Scan' },
-    { name: 'Kitchen (KDS)', href: '/kitchen', icon: ChefHat, badge: 'Live Tickets' },
-    { name: 'Staff Floor', href: '/staff', icon: UserCheck, badge: 'Waiters' },
-    { name: 'Admin Portal', href: '/admin', icon: Settings, badge: 'Menu & Stock' },
-    { name: 'QR Codes', href: '/admin/qr', icon: QrCode, badge: 'Print' },
-    { name: 'Owner Analytics', href: '/owner', icon: BarChart3, badge: 'Insights' },
+    { name: t('customerMenu'), href: '/table/1', icon: UtensilsCrossed, badge: 'QR Scan' },
+    { name: t('kitchenKds'), href: '/kitchen', icon: ChefHat, badge: 'Live Tickets' },
+    { name: t('staffFloor'), href: '/staff', icon: UserCheck, badge: 'Waiters' },
+    { name: t('adminPortal'), href: '/admin', icon: Settings, badge: 'Menu & Stock' },
+    { name: t('qrCodes'), href: '/admin/qr', icon: QrCode, badge: 'Print' },
+    { name: t('ownerAnalytics'), href: '/owner', icon: BarChart3, badge: 'Insights' },
   ];
 
   return (
@@ -30,7 +32,7 @@ export default function NavigationHeader() {
                 DinePulse
               </span>
               <span className="block text-[10px] uppercase font-semibold text-zinc-400 -mt-1 tracking-widest">
-                Digital Restaurant Suite
+                {t('digitalDining')}
               </span>
             </div>
           </Link>
@@ -57,14 +59,34 @@ export default function NavigationHeader() {
             })}
           </nav>
 
-          {/* Quick Demo Switcher */}
+          {/* Language Toggle & Quick Demo Switcher */}
           <div className="flex items-center gap-2">
+            {/* Language Switcher */}
+            <div className="flex items-center bg-zinc-900 border border-zinc-800 p-1 rounded-xl">
+              <button
+                onClick={() => setLanguage('en')}
+                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
+                  language === 'en' ? 'bg-amber-500 text-zinc-950 shadow-md' : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                🇬🇧 EN
+              </button>
+              <button
+                onClick={() => setLanguage('hi')}
+                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
+                  language === 'hi' ? 'bg-amber-500 text-zinc-950 shadow-md' : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                🇮🇳 हिंदी
+              </button>
+            </div>
+
             <Link
               href="/table/1"
-              className="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-zinc-950 text-xs font-bold transition-all shadow-md shadow-amber-500/20 flex items-center gap-1.5"
+              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 text-xs font-bold transition-all shadow-md shadow-amber-500/20"
             >
               <UtensilsCrossed className="w-3.5 h-3.5" />
-              <span>Simulate Table Scan</span>
+              <span>{t('simulateTableScan')}</span>
             </Link>
           </div>
         </div>

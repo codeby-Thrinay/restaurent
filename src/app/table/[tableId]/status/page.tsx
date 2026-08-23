@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { useLanguageStore } from '@/store/useLanguageStore';
 import NavigationHeader from '@/components/NavigationHeader';
 import { Clock, ChefHat, CheckCircle2, Utensils, Star, Send, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
@@ -33,6 +34,7 @@ interface Order {
 export default function OrderStatusPage({ params }: { params: { tableId: string } }) {
   const searchParams = useSearchParams();
   const orderId = searchParams.get('orderId');
+  const { t } = useLanguageStore();
 
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
@@ -79,15 +81,16 @@ export default function OrderStatusPage({ params }: { params: { tableId: string 
         setFeedbackSubmitted(true);
       }
     } catch (err) {
+      console.error('Feedback error', err);
       alert('Could not submit feedback.');
     }
   };
 
   const stages = [
-    { key: 'PENDING', label: 'Order Received', desc: 'Sent to kitchen display', icon: Clock },
-    { key: 'PREPARING', label: 'Chef Cooking', desc: 'Preparing dishes', icon: ChefHat },
-    { key: 'READY', label: 'Plated & Ready', desc: 'Awaiting waiter pickup', icon: Utensils },
-    { key: 'SERVED', label: 'Served to Table', desc: 'Enjoy your meal!', icon: CheckCircle2 },
+    { key: 'PENDING', label: t('orderReceived'), desc: t('orderSentDesc'), icon: Clock },
+    { key: 'PREPARING', label: t('chefCooking'), desc: t('chefCookingDesc'), icon: ChefHat },
+    { key: 'READY', label: t('platedReady'), desc: t('platedReadyDesc'), icon: Utensils },
+    { key: 'SERVED', label: t('servedToTable'), desc: t('servedDesc'), icon: CheckCircle2 },
   ];
 
   const getStageIndex = (status: string) => {
@@ -117,7 +120,7 @@ export default function OrderStatusPage({ params }: { params: { tableId: string 
             href={`/table/${params.tableId}`}
             className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-white transition-colors"
           >
-            <ArrowLeft className="w-4 h-4" /> Back to Menu
+            <ArrowLeft className="w-4 h-4" /> {t('backToMenu')}
           </Link>
           <span className="text-xs font-mono text-zinc-500">Order #{orderId?.substring(0, 8)}</span>
         </div>
@@ -140,8 +143,8 @@ export default function OrderStatusPage({ params }: { params: { tableId: string 
             <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 shadow-2xl space-y-6">
               <div className="flex items-center justify-between border-b border-zinc-800/80 pb-4">
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-widest text-amber-400">Live Status</span>
-                  <h2 className="text-xl font-black">Table {order.table.number} Tracker</h2>
+                  <span className="text-xs font-bold uppercase tracking-widest text-amber-400">{t('liveStatus')}</span>
+                  <h2 className="text-xl font-black">Table {order.table.number} {t('tracker')}</h2>
                 </div>
                 <div className="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 font-extrabold text-xs">
                   {order.status}
@@ -187,7 +190,7 @@ export default function OrderStatusPage({ params }: { params: { tableId: string 
 
               {/* Order Receipt Items Summary */}
               <div className="p-4 bg-zinc-950 rounded-2xl border border-zinc-800/80 space-y-3">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-400">Ordered Ticket Items</h3>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-400">{t('orderedItems')}</h3>
                 <div className="space-y-2 divide-y divide-zinc-800/60">
                   {order.items.map((item) => (
                     <div key={item.id} className="pt-2 first:pt-0 flex items-center justify-between text-xs">
@@ -203,7 +206,7 @@ export default function OrderStatusPage({ params }: { params: { tableId: string 
                 </div>
 
                 <div className="pt-3 border-t border-zinc-800 flex items-center justify-between text-sm font-bold">
-                  <span className="text-zinc-400">Total Amount</span>
+                  <span className="text-zinc-400">{t('totalAmount')}</span>
                   <span className="text-amber-400 text-base">${order.totalAmount.toFixed(2)}</span>
                 </div>
               </div>
@@ -214,13 +217,13 @@ export default function OrderStatusPage({ params }: { params: { tableId: string 
               <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 shadow-2xl space-y-4">
                 <h3 className="text-base font-bold flex items-center gap-2">
                   <Star className="w-5 h-5 text-amber-400 fill-amber-400" />
-                  <span>Rate Your Dining Experience</span>
+                  <span>{t('rateExperience')}</span>
                 </h3>
 
                 {feedbackSubmitted ? (
                   <div className="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl text-center space-y-1">
-                    <p className="text-sm font-bold text-emerald-400">Thank you for your review!</p>
-                    <p className="text-xs text-zinc-400">Your feedback helps us continuously improve our service.</p>
+                    <p className="text-sm font-bold text-emerald-400">{t('thankYouFeedback')}</p>
+                    <p className="text-xs text-zinc-400">{t('feedbackImprove')}</p>
                   </div>
                 ) : (
                   <form onSubmit={handleFeedbackSubmit} className="space-y-4">
@@ -244,7 +247,7 @@ export default function OrderStatusPage({ params }: { params: { tableId: string 
                     <textarea
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
-                      placeholder="Share your thoughts on food quality, speed, or service..."
+                      placeholder={t('feedbackPlaceholder')}
                       rows={3}
                       className="w-full bg-zinc-950 text-xs p-3 rounded-xl border border-zinc-800 text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-amber-500"
                     />
@@ -254,7 +257,7 @@ export default function OrderStatusPage({ params }: { params: { tableId: string 
                       className="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs transition-all shadow-md shadow-amber-500/20 flex items-center justify-center gap-1.5"
                     >
                       <Send className="w-4 h-4" />
-                      <span>Submit Dining Feedback</span>
+                      <span>{t('submitFeedback')}</span>
                     </button>
                   </form>
                 )}
