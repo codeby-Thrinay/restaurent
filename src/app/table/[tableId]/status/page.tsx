@@ -200,14 +200,14 @@ export default function OrderStatusPage({ params }: { params: { tableId: string 
                         </span>
                         {item.notes && <span className="block text-[10px] text-amber-400/90">Note: {item.notes}</span>}
                       </div>
-                      <span className="font-bold text-zinc-300">${(item.price * item.quantity).toFixed(2)}</span>
+                      <span className="font-bold text-zinc-300">₹{(item.price * item.quantity).toFixed(0)}</span>
                     </div>
                   ))}
                 </div>
 
                 <div className="pt-3 border-t border-zinc-800 flex items-center justify-between text-sm font-bold">
                   <span className="text-zinc-400">{t('totalAmount')}</span>
-                  <span className="text-amber-400 text-base">${order.totalAmount.toFixed(2)}</span>
+                  <span className="text-amber-400 text-base">₹{order.totalAmount.toFixed(0)}</span>
                 </div>
               </div>
             </div>

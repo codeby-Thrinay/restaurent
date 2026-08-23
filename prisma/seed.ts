@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('Seeding DinePulse database...');
+  console.log('Seeding DinePulse database with Indian Rupee (₹) pricing...');
 
   // Clean existing records
   await prisma.feedback.deleteMany();
@@ -36,7 +36,7 @@ async function main() {
   const startersCat = await prisma.category.create({
     data: {
       name: 'Starters & Appetizers',
-      description: 'Crispy, savory appetizers to kickstart your appetite.',
+      description: 'Crispy, savory Indian and global appetizers to kickstart your appetite.',
       sortOrder: 1,
     },
   });
@@ -65,40 +65,40 @@ async function main() {
     },
   });
 
-  // 3. Seed Menu Items
+  // 3. Seed Menu Items (Prices in Indian Rupees ₹)
   const menuItems = [
     // Starters
     {
       name: 'Truffle Parmesan Fries',
       description: 'Hand-cut russet fries tossed in black truffle oil, garlic herbs, and aged parmesan.',
-      price: 9.5,
+      price: 290.0,
       isVeg: true,
       spicyLevel: 0,
       image: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=80',
       categoryId: startersCat.id,
     },
     {
-      name: 'Fiery Crispy Wings',
-      description: 'Jumbo chicken wings coated in hot buffalo honey sauce served with creamy blue cheese dip.',
-      price: 13.9,
+      name: 'Fiery Paneer / Chicken Wings',
+      description: 'Crispy marinated bites tossed in hot buffalo honey sauce served with creamy dip.',
+      price: 380.0,
       isVeg: false,
       spicyLevel: 3,
       image: 'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=600&q=80',
       categoryId: startersCat.id,
     },
     {
-      name: 'Avocado Bruschetta',
+      name: 'Avocado Tomato Bruschetta',
       description: 'Grilled sourdough topped with smashed avocado, heirloom tomatoes, basil, and balsamic reduction.',
-      price: 11.0,
+      price: 340.0,
       isVeg: true,
       spicyLevel: 0,
       image: 'https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=600&q=80',
       categoryId: startersCat.id,
     },
     {
-      name: 'Crispy Calamari',
+      name: 'Crispy Garlic Calamari',
       description: 'Flash-fried squid rings served with spicy garlic aioli and lemon wedges.',
-      price: 14.5,
+      price: 420.0,
       isVeg: false,
       spicyLevel: 1,
       image: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80',
@@ -109,16 +109,16 @@ async function main() {
     {
       name: 'Wood-Fired Margherita Pizza',
       description: 'San Marzano tomato sauce, fresh mozzarella di bufala, organic basil, and extra virgin olive oil.',
-      price: 16.5,
+      price: 450.0,
       isVeg: true,
       spicyLevel: 0,
       image: 'https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80',
       categoryId: mainsCat.id,
     },
     {
-      name: 'Smokey Wagyu Smash Burger',
-      description: 'Double Wagyu beef patty, sharp cheddar, caramelized onions, smoked bacon jam, and truffle aioli on brioche.',
-      price: 19.0,
+      name: 'Smokey Wagyu / Lamb Smash Burger',
+      description: 'Double juicy patty, sharp cheddar, caramelized onions, smoked bacon jam, and truffle aioli.',
+      price: 520.0,
       isVeg: false,
       spicyLevel: 0,
       image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80',
@@ -127,7 +127,7 @@ async function main() {
     {
       name: 'Creamy Garlic Butter Salmon',
       description: 'Pan-seared Atlantic salmon fillet served over spinach risotto and dill garlic butter sauce.',
-      price: 24.5,
+      price: 780.0,
       isVeg: false,
       spicyLevel: 0,
       image: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=600&q=80',
@@ -136,7 +136,7 @@ async function main() {
     {
       name: 'Thai Spicy Green Curry',
       description: 'Fragrant coconut curry broth with fresh bamboo shoots, Thai basil, jasmine rice, and grilled tofu.',
-      price: 17.5,
+      price: 480.0,
       isVeg: true,
       spicyLevel: 2,
       image: 'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=600&q=80',
@@ -147,7 +147,7 @@ async function main() {
     {
       name: 'Molten Lava Chocolate Cake',
       description: 'Warm dark chocolate cake with a gooey molten center served with Madagascar vanilla bean gelato.',
-      price: 9.5,
+      price: 280.0,
       isVeg: true,
       spicyLevel: 0,
       image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80',
@@ -156,7 +156,7 @@ async function main() {
     {
       name: 'Classic New York Cheesecake',
       description: 'Rich graham cracker crust cheesecake topped with fresh wild berry compote.',
-      price: 8.5,
+      price: 260.0,
       isVeg: true,
       spicyLevel: 0,
       image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=80',
@@ -167,7 +167,7 @@ async function main() {
     {
       name: 'Passionfruit Mango Fizz',
       description: 'Sparkling mineral water infused with passionfruit puree, mango nectar, fresh mint, and lime.',
-      price: 6.5,
+      price: 190.0,
       isVeg: true,
       spicyLevel: 0,
       image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80',
@@ -176,7 +176,7 @@ async function main() {
     {
       name: 'Iced Vanilla Cold Brew Coffee',
       description: 'Slow-steeped artisan cold brew layered with homemade vanilla syrup and cold oat foam.',
-      price: 5.5,
+      price: 180.0,
       isVeg: true,
       spicyLevel: 0,
       image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80',
@@ -190,7 +190,7 @@ async function main() {
 
   // 4. Seed Sample Active Order for Table 2
   const table2 = await prisma.table.findUnique({ where: { number: 2 } });
-  const burger = await prisma.menuItem.findFirst({ where: { name: 'Smokey Wagyu Smash Burger' } });
+  const burger = await prisma.menuItem.findFirst({ where: { name: 'Smokey Wagyu / Lamb Smash Burger' } });
   const fries = await prisma.menuItem.findFirst({ where: { name: 'Truffle Parmesan Fries' } });
 
   if (table2 && burger && fries) {
@@ -213,7 +213,7 @@ async function main() {
     console.log(`Created sample order ${sampleOrder.id} for Table 2`);
   }
 
-  console.log('Seeding completed successfully!');
+  console.log('Rupee seeding completed successfully!');
 }
 
 main()

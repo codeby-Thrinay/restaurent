@@ -39,7 +39,7 @@ export default function WaiterStaffPortalPage() {
 
   useEffect(() => {
     fetchData();
-    const interval = setInterval(fetchData, 3000); // Poll table states & waiter alerts
+    const interval = setInterval(fetchData, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -68,6 +68,7 @@ export default function WaiterStaffPortalPage() {
       });
       if (res.ok) fetchData();
     } catch (err) {
+      console.error('Failed to clear alert', err);
       alert('Failed to clear alert');
     }
   };
@@ -81,6 +82,7 @@ export default function WaiterStaffPortalPage() {
       });
       if (res.ok) fetchData();
     } catch (err) {
+      console.error('Failed to update table status', err);
       alert('Failed to update table status');
     }
   };
@@ -94,6 +96,7 @@ export default function WaiterStaffPortalPage() {
       });
       if (res.ok) fetchData();
     } catch (err) {
+      console.error('Failed to mark order paid', err);
       alert('Failed to mark order paid');
     }
   };
@@ -169,7 +172,6 @@ export default function WaiterStaffPortalPage() {
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
               {tables.map((table) => {
                 const unpaidOrder = table.orders.find((o) => o.paymentStatus === 'UNPAID');
-                const hasPendingRequest = table.requests.length > 0;
 
                 const statusBg =
                   table.status === 'VACANT'
@@ -213,7 +215,7 @@ export default function WaiterStaffPortalPage() {
                       {unpaidOrder && (
                         <div className="flex items-center justify-between text-xs pt-1 border-t border-zinc-800">
                           <span className="text-zinc-400">Unpaid Bill:</span>
-                          <span className="font-extrabold text-amber-400">${unpaidOrder.totalAmount.toFixed(2)}</span>
+                          <span className="font-extrabold text-amber-400">₹{unpaidOrder.totalAmount.toFixed(0)}</span>
                         </div>
                       )}
                     </div>

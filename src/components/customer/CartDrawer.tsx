@@ -84,7 +84,7 @@ export default function CartDrawer({ isOpen, onClose, tableId }: CartDrawerProps
                     />
                     <span className="font-semibold text-sm">{item.name}</span>
                   </div>
-                  <span className="font-bold text-sm text-amber-400">${(item.price * item.quantity).toFixed(2)}</span>
+                  <span className="font-bold text-sm text-amber-400">₹{(item.price * item.quantity).toFixed(0)}</span>
                 </div>
 
                 {/* Quantity Controls & Notes */}
@@ -143,7 +143,7 @@ export default function CartDrawer({ isOpen, onClose, tableId }: CartDrawerProps
 
             <div className="flex items-center justify-between text-sm font-semibold border-t border-zinc-800/80 pt-3">
               <span className="text-zinc-400">{t('totalOrderAmount')}</span>
-              <span className="text-xl font-black text-amber-400">${totalPrice.toFixed(2)}</span>
+              <span className="text-xl font-black text-amber-400">₹{totalPrice.toFixed(0)}</span>
             </div>
 
             <button

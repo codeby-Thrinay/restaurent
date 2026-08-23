@@ -233,7 +233,7 @@ export default function CustomerTableMenuPage({ params }: { params: { tableId: s
                           {dish.name}
                         </h3>
                         <span className="font-extrabold text-sm text-amber-400 whitespace-nowrap">
-                          ${dish.price.toFixed(2)}
+                          ₹{dish.price.toFixed(0)}
                         </span>
                       </div>
 
@@ -309,7 +309,7 @@ export default function CustomerTableMenuPage({ params }: { params: { tableId: s
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="text-base font-black">${totalPrice.toFixed(2)}</span>
+              <span className="text-base font-black">₹{totalPrice.toFixed(0)}</span>
               <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </div>
           </button>

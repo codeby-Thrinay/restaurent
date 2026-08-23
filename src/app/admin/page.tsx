@@ -156,7 +156,7 @@ export default function AdminMenuPage() {
                       <p className="text-xs text-zinc-400 line-clamp-2 leading-relaxed">{item.description}</p>
 
                       <div className="flex items-center justify-between pt-1">
-                        <span className="font-extrabold text-amber-400 text-sm">${item.price.toFixed(2)}</span>
+                        <span className="font-extrabold text-amber-400 text-sm">₹{item.price.toFixed(0)}</span>
 
                         {/* Toggle Stock Badge */}
                         <button
@@ -213,7 +213,7 @@ export default function AdminMenuPage() {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="e.g. Lobster Thermidor"
+                  placeholder="e.g. Paneer Butter Masala"
                   className="w-full bg-zinc-950 text-xs p-2.5 rounded-xl border border-zinc-800 text-zinc-200 focus:outline-none focus:border-amber-500"
                 />
               </div>
@@ -234,14 +234,14 @@ export default function AdminMenuPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-zinc-400">Price ($)</label>
+                  <label className="text-xs font-semibold text-zinc-400">Price (₹)</label>
                   <input
                     type="number"
-                    step="0.01"
+                    step="1"
                     required
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
-                    placeholder="18.50"
+                    placeholder="350"
                     className="w-full bg-zinc-950 text-xs p-2.5 rounded-xl border border-zinc-800 text-zinc-200 focus:outline-none focus:border-amber-500"
                   />
                 </div>

@@ -60,7 +60,7 @@ export default function RequestBillModal({ isOpen, onClose, tableId, totalAmount
             <CheckCircle2 className="w-12 h-12 text-amber-400 mx-auto animate-bounce" />
             <h3 className="text-lg font-bold text-amber-400">{t('billRequested')}</h3>
             <p className="text-xs text-zinc-400">
-              {t('serverBringingBill')} <strong>${totalAmount.toFixed(2)}</strong>
+              {t('serverBringingBill')} <strong>₹{totalAmount.toFixed(0)}</strong>
             </p>
           </div>
         ) : (
@@ -78,7 +78,7 @@ export default function RequestBillModal({ isOpen, onClose, tableId, totalAmount
             {/* Total summary */}
             <div className="p-3 bg-zinc-950 rounded-xl border border-zinc-800/80 flex items-center justify-between">
               <span className="text-xs text-zinc-400 font-medium">{t('totalBillAmount')}</span>
-              <span className="text-xl font-black text-amber-400">${totalAmount.toFixed(2)}</span>
+              <span className="text-xl font-black text-amber-400">₹{totalAmount.toFixed(0)}</span>
             </div>
 
             {/* Split bill calculator */}
@@ -101,7 +101,7 @@ export default function RequestBillModal({ isOpen, onClose, tableId, totalAmount
                   </button>
                 </div>
                 <span className="text-xs text-zinc-300 font-semibold">
-                  ${perPerson.toFixed(2)} <span className="text-zinc-500 font-normal">/ {t('person')}</span>
+                  ₹{perPerson.toFixed(0)} <span className="text-zinc-500 font-normal">/ {t('person')}</span>
                 </span>
               </div>
             </div>

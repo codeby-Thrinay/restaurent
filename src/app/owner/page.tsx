@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import NavigationHeader from '@/components/NavigationHeader';
-import { BarChart3, DollarSign, ShoppingBag, TrendingUp, Users, Star, RefreshCw, Award, ArrowUpRight } from 'lucide-react';
+import { BarChart3, DollarSign, ShoppingBag, TrendingUp, Star, RefreshCw, Award, ArrowUpRight } from 'lucide-react';
 
 interface OrderItem {
   quantity: number;
@@ -102,7 +102,7 @@ export default function OwnerAnalyticsDashboardPage() {
             </div>
             <div>
               <h1 className="text-xl font-black tracking-tight">Executive Owner Analytics</h1>
-              <p className="text-xs text-zinc-400">Real-time revenue metrics, dish sales & customer ratings</p>
+              <p className="text-xs text-zinc-400">Real-time revenue metrics, dish sales & customer ratings (INR ₹)</p>
             </div>
           </div>
 
@@ -131,7 +131,7 @@ export default function OwnerAnalyticsDashboardPage() {
                   </div>
                 </div>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-black text-amber-400">${totalRevenue.toFixed(2)}</span>
+                  <span className="text-2xl font-black text-amber-400">₹{totalRevenue.toFixed(0)}</span>
                   <span className="text-xs text-emerald-400 font-bold flex items-center">
                     +18.4% <ArrowUpRight className="w-3 h-3" />
                   </span>
@@ -165,7 +165,7 @@ export default function OwnerAnalyticsDashboardPage() {
                   </div>
                 </div>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-black text-white">${avgOrderValue.toFixed(2)}</span>
+                  <span className="text-2xl font-black text-white">₹{avgOrderValue.toFixed(0)}</span>
                   <span className="text-xs text-zinc-400 font-semibold">per table ticket</span>
                 </div>
                 <p className="text-[11px] text-zinc-500">Average spend per table</p>
@@ -213,7 +213,7 @@ export default function OwnerAnalyticsDashboardPage() {
                             <span className="text-[11px] text-zinc-500">{dish.count} orders placed</span>
                           </div>
                         </div>
-                        <span className="font-extrabold text-amber-400 text-sm">${dish.total.toFixed(2)}</span>
+                        <span className="font-extrabold text-amber-400 text-sm">₹{dish.total.toFixed(0)}</span>
                       </div>
                     ))
                   )}
@@ -250,7 +250,7 @@ export default function OwnerAnalyticsDashboardPage() {
                           </div>
                         </div>
 
-                        {f.comment && <p className="text-xs text-zinc-300 italic">"{f.comment}"</p>}
+                        {f.comment && <p className="text-xs text-zinc-300 italic">&quot;{f.comment}&quot;</p>}
                         <span className="block text-[10px] text-zinc-500">
                           {new Date(f.createdAt).toLocaleDateString()} {new Date(f.createdAt).toLocaleTimeString()}
                         </span>
