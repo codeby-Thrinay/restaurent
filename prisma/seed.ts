@@ -68,7 +68,7 @@ async function main() {
   });
 
   // Check if food101_dishes.json exists from download_food101.py script
-  const jsonPath = path.join(__dirname, '..', 'food101_dishes.json');
+  const jsonPath = path.resolve(process.cwd(), 'food101_dishes.json');
   let food101Dishes: any[] = [];
 
   if (fs.existsSync(jsonPath)) {
@@ -116,7 +116,7 @@ async function main() {
       categoryId: startersCat.id,
     },
     {
-      name: 'Loaded Loaded Nachos',
+      name: 'Loaded Nachos Supreme',
       description: 'Crispy corn tortilla chips piled high with melted cheese, jalapenos, salsa, and guacamole.',
       price: 280.0,
       isVeg: true,
@@ -125,7 +125,7 @@ async function main() {
       categoryId: startersCat.id,
     },
     {
-      name: 'Seasoned French Fries',
+      name: 'Seasoned Peri Peri Fries',
       description: 'Golden crispy russet potato fries tossed in secret peri-peri spice blend.',
       price: 240.0,
       isVeg: true,
@@ -279,7 +279,7 @@ async function main() {
       });
     }
   } else {
-    console.log('Seeding default Food-101 menu items...');
+    console.log('Seeding Food-101 menu items...');
     for (const item of defaultFood101Items) {
       await prisma.menuItem.create({ data: item });
     }
