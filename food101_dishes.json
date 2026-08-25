@@ -1,0 +1,1012 @@
+[
+  {
+    "className": "apple_pie",
+    "name": "Apple Pie",
+    "description": "Authentic Apple Pie prepared fresh with traditional spices and premium ingredients.",
+    "price": 270.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/apple_pie.jpg",
+    "categoryName": "Desserts & Sweets"
+  },
+  {
+    "className": "baby_back_ribs",
+    "name": "Baby Back Ribs",
+    "description": "Authentic Baby Back Ribs prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/baby_back_ribs.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "baklava",
+    "name": "Baklava",
+    "description": "Authentic Baklava prepared fresh with traditional spices and premium ingredients.",
+    "price": 280.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/baklava.jpg",
+    "categoryName": "Desserts & Sweets"
+  },
+  {
+    "className": "beef_carpaccio",
+    "name": "Beef Carpaccio",
+    "description": "Authentic Beef Carpaccio prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/beef_carpaccio.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "beef_tartare",
+    "name": "Beef Tartare",
+    "description": "Authentic Beef Tartare prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/beef_tartare.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "beet_salad",
+    "name": "Beet Salad",
+    "description": "Authentic Beet Salad prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/beet_salad.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "beignets",
+    "name": "Beignets",
+    "description": "Authentic Beignets prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/beignets.jpg",
+    "categoryName": "Desserts & Sweets"
+  },
+  {
+    "className": "bibimbap",
+    "name": "Bibimbap",
+    "description": "Authentic Bibimbap prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/bibimbap.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "bread_pudding",
+    "name": "Bread Pudding",
+    "description": "Authentic Bread Pudding prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/bread_pudding.jpg",
+    "categoryName": "Desserts & Sweets"
+  },
+  {
+    "className": "breakfast_burrito",
+    "name": "Breakfast Burrito",
+    "description": "Authentic Breakfast Burrito prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/breakfast_burrito.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "bruschetta",
+    "name": "Bruschetta",
+    "description": "Authentic Bruschetta prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/bruschetta.jpg",
+    "categoryName": "Starters & Appetizers"
+  },
+  {
+    "className": "caesar_salad",
+    "name": "Caesar Salad",
+    "description": "Authentic Caesar Salad prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/caesar_salad.jpg",
+    "categoryName": "Starters & Appetizers"
+  },
+  {
+    "className": "cannoli",
+    "name": "Cannoli",
+    "description": "Authentic Cannoli prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/cannoli.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "caprese_salad",
+    "name": "Caprese Salad",
+    "description": "Authentic Caprese Salad prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/caprese_salad.jpg",
+    "categoryName": "Starters & Appetizers"
+  },
+  {
+    "className": "carrot_cake",
+    "name": "Carrot Cake",
+    "description": "Authentic Carrot Cake prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/carrot_cake.jpg",
+    "categoryName": "Desserts & Sweets"
+  },
+  {
+    "className": "ceviche",
+    "name": "Ceviche",
+    "description": "Authentic Ceviche prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/ceviche.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "cheesecake",
+    "name": "Cheesecake",
+    "description": "Authentic Cheesecake prepared fresh with traditional spices and premium ingredients.",
+    "price": 310.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/cheesecake.jpg",
+    "categoryName": "Desserts & Sweets"
+  },
+  {
+    "className": "cheese_plate",
+    "name": "Cheese Plate",
+    "description": "Authentic Cheese Plate prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/cheese_plate.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "chicken_curry",
+    "name": "Chicken Curry",
+    "description": "Authentic Chicken Curry prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/chicken_curry.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "chicken_quesadilla",
+    "name": "Chicken Quesadilla",
+    "description": "Authentic Chicken Quesadilla prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/chicken_quesadilla.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "chicken_wings",
+    "name": "Chicken Wings",
+    "description": "Authentic Chicken Wings prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/chicken_wings.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "chocolate_cake",
+    "name": "Chocolate Cake",
+    "description": "Authentic Chocolate Cake prepared fresh with traditional spices and premium ingredients.",
+    "price": 290.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/chocolate_cake.jpg",
+    "categoryName": "Desserts & Sweets"
+  },
+  {
+    "className": "chocolate_mousse",
+    "name": "Chocolate Mousse",
+    "description": "Authentic Chocolate Mousse prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/chocolate_mousse.jpg",
+    "categoryName": "Desserts & Sweets"
+  },
+  {
+    "className": "churros",
+    "name": "Churros",
+    "description": "Authentic Churros prepared fresh with traditional spices and premium ingredients.",
+    "price": 230.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/churros.jpg",
+    "categoryName": "Desserts & Sweets"
+  },
+  {
+    "className": "clam_chowder",
+    "name": "Clam Chowder",
+    "description": "Authentic Clam Chowder prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/clam_chowder.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "club_sandwich",
+    "name": "Club Sandwich",
+    "description": "Authentic Club Sandwich prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/club_sandwich.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "crab_cakes",
+    "name": "Crab Cakes",
+    "description": "Authentic Crab Cakes prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/crab_cakes.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "creme_brulee",
+    "name": "Creme Brulee",
+    "description": "Authentic Creme Brulee prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/creme_brulee.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "croque_madame",
+    "name": "Croque Madame",
+    "description": "Authentic Croque Madame prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/croque_madame.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "cup_cakes",
+    "name": "Cup Cakes",
+    "description": "Authentic Cup Cakes prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/cup_cakes.jpg",
+    "categoryName": "Desserts & Sweets"
+  },
+  {
+    "className": "deviled_eggs",
+    "name": "Deviled Eggs",
+    "description": "Authentic Deviled Eggs prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/deviled_eggs.jpg",
+    "categoryName": "Starters & Appetizers"
+  },
+  {
+    "className": "donuts",
+    "name": "Donuts",
+    "description": "Authentic Donuts prepared fresh with traditional spices and premium ingredients.",
+    "price": 190.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/donuts.jpg",
+    "categoryName": "Desserts & Sweets"
+  },
+  {
+    "className": "dumplings",
+    "name": "Dumplings",
+    "description": "Authentic Dumplings prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/dumplings.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "edamame",
+    "name": "Edamame",
+    "description": "Authentic Edamame prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/edamame.jpg",
+    "categoryName": "Starters & Appetizers"
+  },
+  {
+    "className": "eggs_benedict",
+    "name": "Eggs Benedict",
+    "description": "Authentic Eggs Benedict prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/eggs_benedict.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "escargots",
+    "name": "Escargots",
+    "description": "Authentic Escargots prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/escargots.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "falafel",
+    "name": "Falafel",
+    "description": "Authentic Falafel prepared fresh with traditional spices and premium ingredients.",
+    "price": 260.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/falafel.jpg",
+    "categoryName": "Starters & Appetizers"
+  },
+  {
+    "className": "filet_mignon",
+    "name": "Filet Mignon",
+    "description": "Authentic Filet Mignon prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/filet_mignon.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "fish_and_chips",
+    "name": "Fish And Chips",
+    "description": "Authentic Fish And Chips prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/fish_and_chips.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "foie_gras",
+    "name": "Foie Gras",
+    "description": "Authentic Foie Gras prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/foie_gras.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "french_fries",
+    "name": "French Fries",
+    "description": "Authentic French Fries prepared fresh with traditional spices and premium ingredients.",
+    "price": 240.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/french_fries.jpg",
+    "categoryName": "Starters & Appetizers"
+  },
+  {
+    "className": "french_onion_soup",
+    "name": "French Onion Soup",
+    "description": "Authentic French Onion Soup prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/french_onion_soup.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "french_toast",
+    "name": "French Toast",
+    "description": "Authentic French Toast prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/french_toast.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "fried_calamari",
+    "name": "Fried Calamari",
+    "description": "Authentic Fried Calamari prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/fried_calamari.jpg",
+    "categoryName": "Starters & Appetizers"
+  },
+  {
+    "className": "fried_rice",
+    "name": "Fried Rice",
+    "description": "Authentic Fried Rice prepared fresh with traditional spices and premium ingredients.",
+    "price": 290.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/fried_rice.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "frozen_yogurt",
+    "name": "Frozen Yogurt",
+    "description": "Authentic Frozen Yogurt prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/frozen_yogurt.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "garlic_bread",
+    "name": "Garlic Bread",
+    "description": "Authentic Garlic Bread prepared fresh with traditional spices and premium ingredients.",
+    "price": 220.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/garlic_bread.jpg",
+    "categoryName": "Starters & Appetizers"
+  },
+  {
+    "className": "gnocchi",
+    "name": "Gnocchi",
+    "description": "Authentic Gnocchi prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/gnocchi.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "greek_salad",
+    "name": "Greek Salad",
+    "description": "Authentic Greek Salad prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/greek_salad.jpg",
+    "categoryName": "Starters & Appetizers"
+  },
+  {
+    "className": "grilled_cheese_sandwich",
+    "name": "Grilled Cheese Sandwich",
+    "description": "Authentic Grilled Cheese Sandwich prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/grilled_cheese_sandwich.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "grilled_salmon",
+    "name": "Grilled Salmon",
+    "description": "Authentic Grilled Salmon prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/grilled_salmon.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "guacamole",
+    "name": "Guacamole",
+    "description": "Authentic Guacamole prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/guacamole.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "gyoza",
+    "name": "Gyoza",
+    "description": "Authentic Gyoza prepared fresh with traditional spices and premium ingredients.",
+    "price": 340.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/gyoza.jpg",
+    "categoryName": "Starters & Appetizers"
+  },
+  {
+    "className": "hamburger",
+    "name": "Hamburger",
+    "description": "Authentic Hamburger prepared fresh with traditional spices and premium ingredients.",
+    "price": 380.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/hamburger.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "hot_and_sour_soup",
+    "name": "Hot And Sour Soup",
+    "description": "Authentic Hot And Sour Soup prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/hot_and_sour_soup.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "hot_dog",
+    "name": "Hot Dog",
+    "description": "Authentic Hot Dog prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/hot_dog.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "huevos_rancheros",
+    "name": "Huevos Rancheros",
+    "description": "Authentic Huevos Rancheros prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/huevos_rancheros.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "hummus",
+    "name": "Hummus",
+    "description": "Authentic Hummus prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/hummus.jpg",
+    "categoryName": "Starters & Appetizers"
+  },
+  {
+    "className": "ice_cream",
+    "name": "Ice Cream",
+    "description": "Authentic Ice Cream prepared fresh with traditional spices and premium ingredients.",
+    "price": 210.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/ice_cream.jpg",
+    "categoryName": "Desserts & Sweets"
+  },
+  {
+    "className": "lasagna",
+    "name": "Lasagna",
+    "description": "Authentic Lasagna prepared fresh with traditional spices and premium ingredients.",
+    "price": 450.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/lasagna.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "lobster_bisque",
+    "name": "Lobster Bisque",
+    "description": "Authentic Lobster Bisque prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/lobster_bisque.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "lobster_roll_sandwich",
+    "name": "Lobster Roll Sandwich",
+    "description": "Authentic Lobster Roll Sandwich prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/lobster_roll_sandwich.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "macaroni_and_cheese",
+    "name": "Macaroni And Cheese",
+    "description": "Authentic Macaroni And Cheese prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/macaroni_and_cheese.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "macarons",
+    "name": "Macarons",
+    "description": "Authentic Macarons prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/macarons.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "miso_soup",
+    "name": "Miso Soup",
+    "description": "Authentic Miso Soup prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/miso_soup.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "mussels",
+    "name": "Mussels",
+    "description": "Authentic Mussels prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/mussels.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "nachos",
+    "name": "Nachos",
+    "description": "Authentic Nachos prepared fresh with traditional spices and premium ingredients.",
+    "price": 280.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/nachos.jpg",
+    "categoryName": "Starters & Appetizers"
+  },
+  {
+    "className": "omelette",
+    "name": "Omelette",
+    "description": "Authentic Omelette prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/omelette.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "onion_rings",
+    "name": "Onion Rings",
+    "description": "Authentic Onion Rings prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/onion_rings.jpg",
+    "categoryName": "Starters & Appetizers"
+  },
+  {
+    "className": "oysters",
+    "name": "Oysters",
+    "description": "Authentic Oysters prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/oysters.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "pad_thai",
+    "name": "Pad Thai",
+    "description": "Authentic Pad Thai prepared fresh with traditional spices and premium ingredients.",
+    "price": 420.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/pad_thai.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "paella",
+    "name": "Paella",
+    "description": "Authentic Paella prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/paella.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "pancakes",
+    "name": "Pancakes",
+    "description": "Authentic Pancakes prepared fresh with traditional spices and premium ingredients.",
+    "price": 250.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/pancakes.jpg",
+    "categoryName": "Desserts & Sweets"
+  },
+  {
+    "className": "panna_cotta",
+    "name": "Panna Cotta",
+    "description": "Authentic Panna Cotta prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/panna_cotta.jpg",
+    "categoryName": "Desserts & Sweets"
+  },
+  {
+    "className": "peking_duck",
+    "name": "Peking Duck",
+    "description": "Authentic Peking Duck prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/peking_duck.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "pho",
+    "name": "Pho",
+    "description": "Authentic Pho prepared fresh with traditional spices and premium ingredients.",
+    "price": 380.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/pho.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "pizza",
+    "name": "Pizza",
+    "description": "Authentic Pizza prepared fresh with traditional spices and premium ingredients.",
+    "price": 490.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/pizza.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "pork_chop",
+    "name": "Pork Chop",
+    "description": "Authentic Pork Chop prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/pork_chop.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "poutine",
+    "name": "Poutine",
+    "description": "Authentic Poutine prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/poutine.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "prime_rib",
+    "name": "Prime Rib",
+    "description": "Authentic Prime Rib prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/prime_rib.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "pulled_pork_sandwich",
+    "name": "Pulled Pork Sandwich",
+    "description": "Authentic Pulled Pork Sandwich prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/pulled_pork_sandwich.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "ramen",
+    "name": "Ramen",
+    "description": "Authentic Ramen prepared fresh with traditional spices and premium ingredients.",
+    "price": 390.0,
+    "isVeg": false,
+    "spicyLevel": 2,
+    "image": "/food101/ramen.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "ravioli",
+    "name": "Ravioli",
+    "description": "Authentic Ravioli prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/ravioli.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "red_velvet_cake",
+    "name": "Red Velvet Cake",
+    "description": "Authentic Red Velvet Cake prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/red_velvet_cake.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "risotto",
+    "name": "Risotto",
+    "description": "Authentic Risotto prepared fresh with traditional spices and premium ingredients.",
+    "price": 480.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/risotto.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "samosa",
+    "name": "Samosa",
+    "description": "Authentic Samosa prepared fresh with traditional spices and premium ingredients.",
+    "price": 180.0,
+    "isVeg": true,
+    "spicyLevel": 2,
+    "image": "/food101/samosa.jpg",
+    "categoryName": "Starters & Appetizers"
+  },
+  {
+    "className": "sashimi",
+    "name": "Sashimi",
+    "description": "Authentic Sashimi prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/sashimi.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "scallops",
+    "name": "Scallops",
+    "description": "Authentic Scallops prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/scallops.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "seaweed_salad",
+    "name": "Seaweed Salad",
+    "description": "Authentic Seaweed Salad prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/seaweed_salad.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "shrimp_and_grits",
+    "name": "Shrimp And Grits",
+    "description": "Authentic Shrimp And Grits prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/shrimp_and_grits.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "spaghetti_bolognese",
+    "name": "Spaghetti Bolognese",
+    "description": "Authentic Spaghetti Bolognese prepared fresh with traditional spices and premium ingredients.",
+    "price": 440.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/spaghetti_bolognese.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "spaghetti_carbonara",
+    "name": "Spaghetti Carbonara",
+    "description": "Authentic Spaghetti Carbonara prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/spaghetti_carbonara.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "spring_rolls",
+    "name": "Spring Rolls",
+    "description": "Authentic Spring Rolls prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/spring_rolls.jpg",
+    "categoryName": "Starters & Appetizers"
+  },
+  {
+    "className": "steak",
+    "name": "Steak",
+    "description": "Authentic Steak prepared fresh with traditional spices and premium ingredients.",
+    "price": 790.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/steak.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "strawberry_shortcake",
+    "name": "Strawberry Shortcake",
+    "description": "Authentic Strawberry Shortcake prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/strawberry_shortcake.jpg",
+    "categoryName": "Desserts & Sweets"
+  },
+  {
+    "className": "sushi",
+    "name": "Sushi",
+    "description": "Authentic Sushi prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/sushi.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "tacos",
+    "name": "Tacos",
+    "description": "Authentic Tacos prepared fresh with traditional spices and premium ingredients.",
+    "price": 360.0,
+    "isVeg": false,
+    "spicyLevel": 2,
+    "image": "/food101/tacos.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "takoyaki",
+    "name": "Takoyaki",
+    "description": "Authentic Takoyaki prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/takoyaki.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "tiramisu",
+    "name": "Tiramisu",
+    "description": "Authentic Tiramisu prepared fresh with traditional spices and premium ingredients.",
+    "price": 320.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/tiramisu.jpg",
+    "categoryName": "Desserts & Sweets"
+  },
+  {
+    "className": "tuna_tartare",
+    "name": "Tuna Tartare",
+    "description": "Authentic Tuna Tartare prepared fresh with traditional spices and premium ingredients.",
+    "price": 350.0,
+    "isVeg": false,
+    "spicyLevel": 0,
+    "image": "/food101/tuna_tartare.jpg",
+    "categoryName": "Chef Mains"
+  },
+  {
+    "className": "waffles",
+    "name": "Waffles",
+    "description": "Authentic Waffles prepared fresh with traditional spices and premium ingredients.",
+    "price": 260.0,
+    "isVeg": true,
+    "spicyLevel": 0,
+    "image": "/food101/waffles.jpg",
+    "categoryName": "Desserts & Sweets"
+  }
+]
