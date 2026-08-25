@@ -1,9 +1,11 @@
 import { PrismaClient } from '@prisma/client';
+import fs from 'fs';
+import path from 'path';
 
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('Seeding DinePulse database with Indian Rupee (₹) pricing...');
+  console.log('Seeding DinePulse database with Food-101 Dataset items (₹)...');
 
   // Clean existing records
   await prisma.feedback.deleteMany();
@@ -36,7 +38,7 @@ async function main() {
   const startersCat = await prisma.category.create({
     data: {
       name: 'Starters & Appetizers',
-      description: 'Crispy, savory Indian and global appetizers to kickstart your appetite.',
+      description: 'Crispy starters, street food delicacies, and savory appetizers.',
       sortOrder: 1,
     },
   });
@@ -44,7 +46,7 @@ async function main() {
   const mainsCat = await prisma.category.create({
     data: {
       name: 'Chef Mains',
-      description: 'Handcrafted signature main courses prepared fresh to order.',
+      description: 'Global and authentic signature main courses prepared fresh to order.',
       sortOrder: 2,
     },
   });
@@ -52,7 +54,7 @@ async function main() {
   const dessertsCat = await prisma.category.create({
     data: {
       name: 'Desserts & Sweets',
-      description: 'Decadent sweet treats, artisanal ice creams, and pastries.',
+      description: 'Decadent desserts, sweet treats, artisanal ice creams, and pastries.',
       sortOrder: 3,
     },
   });
@@ -60,112 +62,184 @@ async function main() {
   const drinksCat = await prisma.category.create({
     data: {
       name: 'Beverages & Mocktails',
-      description: 'Refreshing cold press juices, specialty coffees, and mocktails.',
+      description: 'Refreshing cold press juices, specialty coffees, and artisan mocktails.',
       sortOrder: 4,
     },
   });
 
-  // 3. Seed Menu Items (Prices in Indian Rupees ₹)
-  const menuItems = [
-    // Starters
+  // Check if food101_dishes.json exists from download_food101.py script
+  const jsonPath = path.join(__dirname, '..', 'food101_dishes.json');
+  let food101Dishes: any[] = [];
+
+  if (fs.existsSync(jsonPath)) {
+    console.log('Loading Food-101 metadata from food101_dishes.json...');
+    food101Dishes = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'));
+  }
+
+  // Complete Food-101 dataset classes with high resolution food imagery
+  const defaultFood101Items = [
+    // Starters & Appetizers
     {
-      name: 'Truffle Parmesan Fries',
-      description: 'Hand-cut russet fries tossed in black truffle oil, garlic herbs, and aged parmesan.',
-      price: 290.0,
+      name: 'Crispy Samosa Plate',
+      description: 'Traditional spiced potato and green pea turnover pastry served with mint & tamarind chutney.',
+      price: 180.0,
+      isVeg: true,
+      spicyLevel: 2,
+      image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80',
+      categoryId: startersCat.id,
+    },
+    {
+      name: 'Steamed Pork / Veg Gyoza',
+      description: 'Pan-fried Japanese dumplings stuffed with seasoned vegetables and aromatic ginger soy dip.',
+      price: 340.0,
+      isVeg: true,
+      spicyLevel: 1,
+      image: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=600&q=80',
+      categoryId: startersCat.id,
+    },
+    {
+      name: 'Golden Crispy Falafel Bites',
+      description: 'Middle Eastern spiced chickpea patties served with creamy tahini sauce and warm pita.',
+      price: 260.0,
+      isVeg: true,
+      spicyLevel: 1,
+      image: 'https://images.unsplash.com/photo-1593001874117-c99c800e3eb7?auto=format&fit=crop&w=600&q=80',
+      categoryId: startersCat.id,
+    },
+    {
+      name: 'Truffle Garlic Bread',
+      description: 'Freshly baked baguette brushed with roasted garlic butter, rosemary, and melted mozzarella.',
+      price: 220.0,
       isVeg: true,
       spicyLevel: 0,
       image: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=80',
       categoryId: startersCat.id,
     },
     {
-      name: 'Fiery Paneer / Chicken Wings',
-      description: 'Crispy marinated bites tossed in hot buffalo honey sauce served with creamy dip.',
-      price: 380.0,
-      isVeg: false,
-      spicyLevel: 3,
-      image: 'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=600&q=80',
-      categoryId: startersCat.id,
-    },
-    {
-      name: 'Avocado Tomato Bruschetta',
-      description: 'Grilled sourdough topped with smashed avocado, heirloom tomatoes, basil, and balsamic reduction.',
-      price: 340.0,
+      name: 'Loaded Loaded Nachos',
+      description: 'Crispy corn tortilla chips piled high with melted cheese, jalapenos, salsa, and guacamole.',
+      price: 280.0,
       isVeg: true,
-      spicyLevel: 0,
-      image: 'https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=600&q=80',
+      spicyLevel: 2,
+      image: 'https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?auto=format&fit=crop&w=600&q=80',
       categoryId: startersCat.id,
     },
     {
-      name: 'Crispy Garlic Calamari',
-      description: 'Flash-fried squid rings served with spicy garlic aioli and lemon wedges.',
-      price: 420.0,
-      isVeg: false,
+      name: 'Seasoned French Fries',
+      description: 'Golden crispy russet potato fries tossed in secret peri-peri spice blend.',
+      price: 240.0,
+      isVeg: true,
       spicyLevel: 1,
-      image: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80',
+      image: 'https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=600&q=80',
       categoryId: startersCat.id,
     },
 
-    // Mains
+    // Chef Mains
     {
       name: 'Wood-Fired Margherita Pizza',
       description: 'San Marzano tomato sauce, fresh mozzarella di bufala, organic basil, and extra virgin olive oil.',
-      price: 450.0,
+      price: 490.0,
       isVeg: true,
       spicyLevel: 0,
       image: 'https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80',
       categoryId: mainsCat.id,
     },
     {
-      name: 'Smokey Wagyu / Lamb Smash Burger',
-      description: 'Double juicy patty, sharp cheddar, caramelized onions, smoked bacon jam, and truffle aioli.',
-      price: 520.0,
+      name: 'Smokey Wagyu Smash Burger',
+      description: 'Double beef patty, sharp cheddar, caramelized onions, smoked bacon jam, and truffle aioli on brioche.',
+      price: 420.0,
       isVeg: false,
       spicyLevel: 0,
       image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80',
       categoryId: mainsCat.id,
     },
     {
-      name: 'Creamy Garlic Butter Salmon',
-      description: 'Pan-seared Atlantic salmon fillet served over spinach risotto and dill garlic butter sauce.',
-      price: 780.0,
-      isVeg: false,
-      spicyLevel: 0,
-      image: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=600&q=80',
+      name: 'Authentic Thai Pad Thai',
+      description: 'Stir-fried rice noodles with tamarind sauce, crushed peanuts, bean sprouts, and fresh lime.',
+      price: 420.0,
+      isVeg: true,
+      spicyLevel: 2,
+      image: 'https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=600&q=80',
       categoryId: mainsCat.id,
     },
     {
-      name: 'Thai Spicy Green Curry',
-      description: 'Fragrant coconut curry broth with fresh bamboo shoots, Thai basil, jasmine rice, and grilled tofu.',
-      price: 480.0,
-      isVeg: true,
+      name: 'Japanese Tonkotsu Ramen',
+      description: 'Rich pork broth ramen noodles topped with soft-boiled chashu egg, bamboo shoots, and scallions.',
+      price: 390.0,
+      isVeg: false,
       spicyLevel: 2,
-      image: 'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=600&q=80',
+      image: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80',
+      categoryId: mainsCat.id,
+    },
+    {
+      name: 'Korean Bibimbap Rice Bowl',
+      description: 'Warm white rice topped with sautéed vegetables, spicy chili paste, fried egg, and sliced beef.',
+      price: 410.0,
+      isVeg: false,
+      spicyLevel: 2,
+      image: 'https://images.unsplash.com/photo-1553163147-622ab57be1c7?auto=format&fit=crop&w=600&q=80',
+      categoryId: mainsCat.id,
+    },
+    {
+      name: 'Street Style Tacos Al Pastor',
+      description: 'Three warm corn tortillas filled with marinated grilled meat, cilantro, diced onions, and salsa verde.',
+      price: 360.0,
+      isVeg: false,
+      spicyLevel: 2,
+      image: 'https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=600&q=80',
+      categoryId: mainsCat.id,
+    },
+    {
+      name: 'Classic Baked Lasagna Bolognese',
+      description: 'Layers of pasta sheets, rich slow-cooked meat ragu, creamy béchamel sauce, and parmesan.',
+      price: 450.0,
+      isVeg: false,
+      spicyLevel: 0,
+      image: 'https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=600&q=80',
       categoryId: mainsCat.id,
     },
 
     // Desserts
     {
-      name: 'Molten Lava Chocolate Cake',
-      description: 'Warm dark chocolate cake with a gooey molten center served with Madagascar vanilla bean gelato.',
-      price: 280.0,
+      name: 'Classic Italian Tiramisu',
+      description: 'Ladyfinger biscuits dipped in espresso coffee, layered with whipped mascarpone cheese and cocoa powder.',
+      price: 320.0,
       isVeg: true,
       spicyLevel: 0,
-      image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80',
+      image: 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=600&q=80',
       categoryId: dessertsCat.id,
     },
     {
-      name: 'Classic New York Cheesecake',
-      description: 'Rich graham cracker crust cheesecake topped with fresh wild berry compote.',
-      price: 260.0,
+      name: 'Spanish Cinnamon Churros',
+      description: 'Crispy golden fried dough pastries dusted in cinnamon sugar served with warm dark chocolate dip.',
+      price: 230.0,
+      isVeg: true,
+      spicyLevel: 0,
+      image: 'https://images.unsplash.com/photo-1624371414361-e670edf4898d?auto=format&fit=crop&w=600&q=80',
+      categoryId: dessertsCat.id,
+    },
+    {
+      name: 'New York Strawberry Cheesecake',
+      description: 'Rich and creamy cheesecake on graham cracker crust drizzled with fresh strawberry reduction.',
+      price: 310.0,
       isVeg: true,
       spicyLevel: 0,
       image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=80',
       categoryId: dessertsCat.id,
     },
+    {
+      name: 'Artisanal Ice Cream Sundae',
+      description: 'Three scoops of Madagascar vanilla bean, dark chocolate, and pistachio gelato topped with hot fudge.',
+      price: 210.0,
+      isVeg: true,
+      spicyLevel: 0,
+      image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=600&q=80',
+      categoryId: dessertsCat.id,
+    },
 
     // Drinks
     {
-      name: 'Passionfruit Mango Fizz',
+      name: 'Passionfruit Mango Sparkling Fizz',
       description: 'Sparkling mineral water infused with passionfruit puree, mango nectar, fresh mint, and lime.',
       price: 190.0,
       isVeg: true,
@@ -174,8 +248,8 @@ async function main() {
       categoryId: drinksCat.id,
     },
     {
-      name: 'Iced Vanilla Cold Brew Coffee',
-      description: 'Slow-steeped artisan cold brew layered with homemade vanilla syrup and cold oat foam.',
+      name: 'Iced Vanilla Oat Milk Cold Brew',
+      description: 'Slow-steeped artisan cold brew coffee layered with homemade vanilla syrup and cold oat foam.',
       price: 180.0,
       isVeg: true,
       spicyLevel: 0,
@@ -184,14 +258,37 @@ async function main() {
     },
   ];
 
-  for (const item of menuItems) {
-    await prisma.menuItem.create({ data: item });
+  // Insert items into database
+  if (food101Dishes.length > 0) {
+    console.log(`Seeding ${food101Dishes.length} Food-101 dataset items...`);
+    for (const item of food101Dishes) {
+      let catId = mainsCat.id;
+      if (item.categoryName === 'Starters & Appetizers') catId = startersCat.id;
+      else if (item.categoryName === 'Desserts & Sweets') catId = dessertsCat.id;
+
+      await prisma.menuItem.create({
+        data: {
+          name: item.name,
+          description: item.description,
+          price: item.price,
+          isVeg: item.isVeg,
+          spicyLevel: item.spicyLevel,
+          image: item.image,
+          categoryId: catId,
+        },
+      });
+    }
+  } else {
+    console.log('Seeding default Food-101 menu items...');
+    for (const item of defaultFood101Items) {
+      await prisma.menuItem.create({ data: item });
+    }
   }
 
   // 4. Seed Sample Active Order for Table 2
   const table2 = await prisma.table.findUnique({ where: { number: 2 } });
-  const burger = await prisma.menuItem.findFirst({ where: { name: 'Smokey Wagyu / Lamb Smash Burger' } });
-  const fries = await prisma.menuItem.findFirst({ where: { name: 'Truffle Parmesan Fries' } });
+  const burger = await prisma.menuItem.findFirst({ where: { name: { contains: 'Burger' } } });
+  const fries = await prisma.menuItem.findFirst({ where: { name: { contains: 'Fries' } } });
 
   if (table2 && burger && fries) {
     const sampleOrder = await prisma.order.create({
@@ -213,7 +310,7 @@ async function main() {
     console.log(`Created sample order ${sampleOrder.id} for Table 2`);
   }
 
-  console.log('Rupee seeding completed successfully!');
+  console.log('Food-101 seeding completed successfully!');
 }
 
 main()
