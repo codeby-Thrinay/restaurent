@@ -8,7 +8,7 @@ import NavigationHeader from '@/components/NavigationHeader';
 import CartDrawer from '@/components/customer/CartDrawer';
 import CallWaiterModal from '@/components/customer/CallWaiterModal';
 import RequestBillModal from '@/components/customer/RequestBillModal';
-import { Search, BellRing, Receipt, Flame, Leaf, Sparkles, Check, ChevronRight } from 'lucide-react';
+import { Search, BellRing, Receipt, Flame, Leaf, Sparkles, Check, ChevronRight, Info } from 'lucide-react';
 
 interface MenuItem {
   id: string;
@@ -29,6 +29,14 @@ interface Category {
   items: MenuItem[];
 }
 
+interface TableDetails {
+  id: string;
+  number: number;
+  capacity: number;
+  section: string;
+  status: 'VACANT' | 'OCCUPIED' | 'BILL_REQUESTED' | 'NEEDS_CLEANING';
+}
+
 export default function CustomerTableMenuPage({ params }: { params: { tableId: string } }) {
   const tableNumber = params.tableId;
   const { t } = useLanguageStore();
@@ -36,6 +44,7 @@ export default function CustomerTableMenuPage({ params }: { params: { tableId: s
   const isDark = theme === 'dark';
 
   const [categories, setCategories] = useState<Category[]>([]);
+  const [tableInfo, setTableInfo] = useState<TableDetails | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
   const [dietaryFilter, setDietaryFilter] = useState<'ALL' | 'VEG' | 'NONVEG'>('ALL');
@@ -52,6 +61,10 @@ export default function CustomerTableMenuPage({ params }: { params: { tableId: s
   useEffect(() => {
     setTable(params.tableId, parseInt(params.tableId));
     fetchMenu();
+    fetchTableStatus();
+
+    const interval = setInterval(fetchTableStatus, 3000); // Live poll table status
+    return () => clearInterval(interval);
   }, [params.tableId]);
 
   const fetchMenu = async () => {
@@ -63,6 +76,18 @@ export default function CustomerTableMenuPage({ params }: { params: { tableId: s
       console.error('Error loading menu', err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchTableStatus = async () => {
+    try {
+      const res = await fetch(`/api/tables/${params.tableId}`);
+      if (res.ok) {
+        const data = await res.json();
+        setTableInfo(data);
+      }
+    } catch (err) {
+      console.error('Error loading table status', err);
     }
   };
 
@@ -83,6 +108,43 @@ export default function CustomerTableMenuPage({ params }: { params: { tableId: s
     return matchesSearch && matchesDietary && matchesCategory;
   });
 
+  const getStatusBadge = (status?: string) => {
+    switch (status) {
+      case 'VACANT':
+        return {
+          label: t('vacantStatus'),
+          color: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40',
+          dot: 'bg-emerald-400',
+        };
+      case 'OCCUPIED':
+        return {
+          label: t('occupiedStatus'),
+          color: 'bg-blue-500/20 text-blue-400 border-blue-500/40',
+          dot: 'bg-blue-400',
+        };
+      case 'BILL_REQUESTED':
+        return {
+          label: t('billRequestedStatus'),
+          color: 'bg-amber-500/20 text-amber-400 border-amber-500/40 animate-pulse',
+          dot: 'bg-amber-400',
+        };
+      case 'NEEDS_CLEANING':
+        return {
+          label: t('needsCleaningStatus'),
+          color: 'bg-red-500/20 text-red-400 border-red-500/40',
+          dot: 'bg-red-400',
+        };
+      default:
+        return {
+          label: t('occupiedStatus'),
+          color: 'bg-blue-500/20 text-blue-400 border-blue-500/40',
+          dot: 'bg-blue-400',
+        };
+    }
+  };
+
+  const statusBadge = getStatusBadge(tableInfo?.status);
+
   return (
     <div
       className={`min-h-screen font-sans pb-24 transition-colors ${
@@ -99,22 +161,33 @@ export default function CustomerTableMenuPage({ params }: { params: { tableId: s
             : 'bg-gradient-to-b from-amber-500/10 via-slate-100 to-slate-50 border-slate-200'
         }`}
       >
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
+        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-2xl bg-amber-500 text-zinc-950 flex items-center justify-center font-black text-xl shadow-lg shadow-amber-500/20">
               {tableNumber}
             </div>
             <div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-xs uppercase font-bold tracking-widest text-amber-500">{t('digitalDining')}</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                
+                {/* Live Table Status Badge */}
+                <div
+                  className={`px-2.5 py-0.5 rounded-full border text-[11px] font-extrabold flex items-center gap-1.5 ${statusBadge.color}`}
+                  title={`${t('tableStatus')}: ${statusBadge.label}`}
+                >
+                  <span className={`w-1.5 h-1.5 rounded-full ${statusBadge.dot}`} />
+                  <span>{t('tableStatus')}: {statusBadge.label}</span>
+                </div>
               </div>
-              <h1 className="text-xl font-extrabold tracking-tight">{t('tableMenu')} - {tableNumber}</h1>
+
+              <h1 className="text-xl font-extrabold tracking-tight mt-0.5">
+                {t('tableMenu')} - {tableNumber} {tableInfo?.section ? `(${tableInfo.section})` : ''}
+              </h1>
             </div>
           </div>
 
           {/* Table Action Quick Buttons */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 self-end sm:self-auto">
             <button
               onClick={() => setIsWaiterModalOpen(true)}
               className={`px-3 py-2 rounded-xl border text-xs font-semibold flex items-center gap-1.5 transition-all shadow ${
@@ -124,7 +197,7 @@ export default function CustomerTableMenuPage({ params }: { params: { tableId: s
               }`}
             >
               <BellRing className="w-4 h-4 text-amber-500" />
-              <span className="hidden sm:inline">{t('callWaiter')}</span>
+              <span>{t('callWaiter')}</span>
             </button>
             <button
               onClick={() => setIsBillModalOpen(true)}
@@ -135,7 +208,7 @@ export default function CustomerTableMenuPage({ params }: { params: { tableId: s
               }`}
             >
               <Receipt className="w-4 h-4 text-emerald-500" />
-              <span className="hidden sm:inline">{t('requestBill')}</span>
+              <span>{t('requestBill')}</span>
             </button>
           </div>
         </div>

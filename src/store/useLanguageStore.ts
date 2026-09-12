@@ -14,6 +14,15 @@ export const translations = {
     adminPortal: 'Admin Portal',
     qrCodes: 'QR Codes',
     ownerAnalytics: 'Owner Analytics',
+
+    // Table Status Badges
+    tableStatus: 'Table Status',
+    vacantStatus: 'Vacant',
+    occupiedStatus: 'Occupied',
+    billRequestedStatus: 'Bill Requested',
+    needsCleaningStatus: 'Needs Cleaning',
+    capacity: 'Capacity',
+    guests: 'Guests',
     
     // Customer Page
     searchPlaceholder: 'Search appetizers, steaks, pasta, drinks...',
@@ -99,6 +108,15 @@ export const translations = {
     adminPortal: 'एडमिन पोर्टल',
     qrCodes: 'क्यूआर कोड',
     ownerAnalytics: 'मालिक एनालिटिक्स',
+
+    // Table Status Badges
+    tableStatus: 'टेबल स्थिति',
+    vacantStatus: 'खाली (Vacant)',
+    occupiedStatus: 'ऑक्यूपाइड (Occupied)',
+    billRequestedStatus: 'बिल का अनुरोध (Bill Requested)',
+    needsCleaningStatus: 'सफाई की आवश्यकता (Cleaning)',
+    capacity: 'क्षमता',
+    guests: 'मेहमान',
 
     // Customer Page
     searchPlaceholder: 'पकवान, ऐपेटाइज़र, पेय खोजें...',
