@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import NavigationHeader from '@/components/NavigationHeader';
-import { ChefHat, Clock, CheckCircle2, Play, AlertCircle, Utensils, RefreshCw } from 'lucide-react';
+import { useThemeStore } from '@/store/useThemeStore';
+import { ChefHat, Clock, CheckCircle2, Flame, RefreshCw, AlertCircle } from 'lucide-react';
 
 interface OrderItem {
   id: string;
   quantity: number;
-  price: number;
   notes: string | null;
   menuItem: {
     name: string;
@@ -20,21 +20,23 @@ interface Order {
   tableId: string;
   status: 'PENDING' | 'PREPARING' | 'READY' | 'SERVED' | 'CANCELLED';
   notes: string | null;
+  createdAt: string;
   items: OrderItem[];
   table: {
     number: number;
   };
-  createdAt: string;
 }
 
-export default function KitchenDisplaySystemPage() {
+export default function KitchenKdsPage() {
+  const { theme } = useThemeStore();
+  const isDark = theme === 'dark';
+
   const [orders, setOrders] = useState<Order[]>([]);
-  const [statusFilter, setStatusFilter] = useState<'ALL' | 'PENDING' | 'PREPARING' | 'READY'>('ALL');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchOrders();
-    const interval = setInterval(fetchOrders, 3000); // Live poll kitchen tickets
+    const interval = setInterval(fetchOrders, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -42,10 +44,8 @@ export default function KitchenDisplaySystemPage() {
     try {
       const res = await fetch('/api/orders');
       if (res.ok) {
-        const data: Order[] = await res.json();
-        // Filter active kitchen orders (exclude SERVED / CANCELLED unless filtered)
-        const kitchenOrders = data.filter((o) => o.status !== 'SERVED' && o.status !== 'CANCELLED');
-        setOrders(kitchenOrders);
+        const data = await res.json();
+        setOrders(data.filter((o: Order) => o.status !== 'SERVED' && o.status !== 'CANCELLED'));
       }
     } catch (err) {
       console.error('Failed to load kitchen tickets', err);
@@ -61,189 +61,168 @@ export default function KitchenDisplaySystemPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: nextStatus }),
       });
-
-      if (res.ok) {
-        fetchOrders();
-      }
+      if (res.ok) fetchOrders();
     } catch (err) {
-      alert('Could not update order status.');
+      console.error('Status update failed', err);
+      alert('Failed to update ticket status');
     }
   };
 
-  const filteredOrders = orders.filter((o) => {
-    if (statusFilter === 'ALL') return true;
-    return o.status === statusFilter;
-  });
-
-  const getTimerMinutes = (createdAt: string) => {
-    const elapsedMs = new Date().getTime() - new Date(createdAt).getTime();
-    return Math.floor(elapsedMs / 60000);
-  };
-
   return (
-    <div className="min-h-screen bg-zinc-950 text-white font-sans pb-16">
+    <div
+      className={`min-h-screen font-sans pb-16 transition-colors ${
+        isDark ? 'bg-zinc-950 text-white' : 'bg-slate-50 text-slate-900'
+      }`}
+    >
       <NavigationHeader />
 
-      {/* Header Controls */}
-      <div className="bg-zinc-900 border-b border-zinc-800 px-4 py-4">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
+      {/* KDS Banner */}
+      <div
+        className={`border-b px-4 py-4 transition-colors ${
+          isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-slate-200'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-orange-500 text-zinc-950 flex items-center justify-center font-black">
+            <div className="w-10 h-10 rounded-xl bg-amber-500 text-zinc-950 flex items-center justify-center font-black">
               <ChefHat className="w-6 h-6" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-xl font-black tracking-tight">Kitchen Display System (KDS)</h1>
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              </div>
-              <p className="text-xs text-zinc-400">Live order queue for chefs & line cooks</p>
+              <h1 className="text-xl font-black tracking-tight">Kitchen Display System (KDS)</h1>
+              <p className={`text-xs ${isDark ? 'text-zinc-400' : 'text-slate-500'}`}>
+                Real-time active order prep queue
+              </p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            {/* Status Filter Tabs */}
-            <div className="flex items-center gap-1 bg-zinc-950 p-1 rounded-xl border border-zinc-800">
-              {(['ALL', 'PENDING', 'PREPARING', 'READY'] as const).map((filter) => (
-                <button
-                  key={filter}
-                  onClick={() => setStatusFilter(filter)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                    statusFilter === filter
-                      ? 'bg-amber-500 text-zinc-950 shadow-md'
-                      : 'text-zinc-400 hover:text-white'
-                  }`}
-                >
-                  {filter} ({filter === 'ALL' ? orders.length : orders.filter((o) => o.status === filter).length})
-                </button>
-              ))}
-            </div>
-
+            <span className="px-3 py-1 rounded-full bg-amber-500/10 text-amber-500 text-xs font-bold border border-amber-500/20">
+              {orders.length} Active Tickets
+            </span>
             <button
               onClick={fetchOrders}
-              className="p-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 transition-colors"
-              title="Refresh Queue"
+              className={`p-2 rounded-xl border text-xs font-semibold flex items-center gap-1 transition-all ${
+                isDark
+                  ? 'bg-zinc-800 hover:bg-zinc-700 border-zinc-700 text-zinc-200'
+                  : 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-800'
+              }`}
             >
-              <RefreshCw className="w-4 h-4" />
+              <RefreshCw className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
       </div>
 
-      {/* Ticket Grid Display */}
+      {/* Ticket Grid Queue */}
       <div className="max-w-7xl mx-auto px-4 pt-6">
         {loading ? (
           <div className="py-20 text-center text-zinc-500 animate-pulse">Loading Kitchen Queue...</div>
-        ) : filteredOrders.length === 0 ? (
-          <div className="py-24 text-center text-zinc-500 space-y-3">
-            <Utensils className="w-12 h-12 mx-auto stroke-1 opacity-40" />
-            <h3 className="text-base font-bold text-zinc-400">Kitchen Ticket Queue Clear</h3>
-            <p className="text-xs text-zinc-600">All customer orders have been cooked and served!</p>
+        ) : orders.length === 0 ? (
+          <div className="text-center py-24 text-zinc-500 space-y-2">
+            <CheckCircle2 className="w-12 h-12 mx-auto opacity-30 stroke-1" />
+            <p className="text-base font-semibold">Kitchen queue is clear!</p>
+            <p className="text-xs text-zinc-600">New table orders will appear here automatically.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filteredOrders.map((order) => {
-              const minutes = getTimerMinutes(order.createdAt);
-              const timerColor =
-                minutes > 20
-                  ? 'bg-red-500/20 text-red-400 border-red-500/40'
-                  : minutes > 10
-                  ? 'bg-amber-500/20 text-amber-400 border-amber-500/40'
-                  : 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40';
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {orders.map((order) => {
+              const minutesAgo = Math.floor((Date.now() - new Date(order.createdAt).getTime()) / 60000);
+              const isUrgent = minutesAgo >= 10;
+
+              const cardBorder =
+                order.status === 'PENDING'
+                  ? isDark
+                    ? 'border-amber-500/80 bg-zinc-900'
+                    : 'border-amber-500 bg-white shadow-md'
+                  : order.status === 'PREPARING'
+                  ? isDark
+                    ? 'border-blue-500/80 bg-zinc-900'
+                    : 'border-blue-500 bg-white shadow-md'
+                  : isDark
+                  ? 'border-emerald-500/80 bg-zinc-900'
+                  : 'border-emerald-500 bg-white shadow-md';
 
               return (
                 <div
                   key={order.id}
-                  className={`bg-zinc-900 border rounded-3xl overflow-hidden shadow-2xl flex flex-col justify-between transition-all ${
-                    order.status === 'PENDING'
-                      ? 'border-amber-500/60 ring-1 ring-amber-500/20'
-                      : order.status === 'PREPARING'
-                      ? 'border-blue-500/60'
-                      : 'border-emerald-500/60'
-                  }`}
+                  className={`border rounded-2xl p-4 flex flex-col justify-between space-y-4 shadow-xl transition-all ${cardBorder}`}
                 >
-                  {/* Ticket Header */}
-                  <div className="p-4 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-amber-500 text-zinc-950 font-black flex items-center justify-center text-lg">
-                        T{order.table.number}
-                      </div>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between border-b pb-2 border-zinc-800/80">
                       <div>
-                        <span className="text-[10px] uppercase font-bold text-zinc-500 tracking-wider">
-                          Ticket #{order.id.substring(0, 6)}
+                        <span className="text-xl font-black">Table {order.table.number}</span>
+                        <span className="block text-[10px] text-zinc-400 font-mono">
+                          #{order.id.substring(0, 6)}
                         </span>
-                        <h3 className="font-extrabold text-sm text-zinc-100">Table {order.table.number}</h3>
                       </div>
-                    </div>
 
-                    <div className={`px-2.5 py-1 rounded-xl border text-xs font-bold flex items-center gap-1 ${timerColor}`}>
-                      <Clock className="w-3.5 h-3.5" />
-                      <span>{minutes}m ago</span>
-                    </div>
-                  </div>
-
-                  {/* Ticket Items List */}
-                  <div className="p-4 flex-1 space-y-3">
-                    <div className="space-y-2 divide-y divide-zinc-800/60">
-                      {order.items.map((item) => (
-                        <div key={item.id} className="pt-2 first:pt-0 flex items-start justify-between gap-2">
-                          <div className="flex items-start gap-2">
-                            <span className="px-2 py-0.5 rounded-lg bg-amber-500/20 text-amber-400 font-black text-sm">
-                              {item.quantity}x
-                            </span>
-                            <div>
-                              <span className="font-bold text-sm text-zinc-100">{item.menuItem.name}</span>
-                              {item.notes && (
-                                <span className="block text-xs font-semibold text-red-400/90 italic">
-                                  🚨 Note: {item.notes}
-                                </span>
-                              )}
-                            </div>
-                          </div>
-                          <span
-                            className={`w-2 h-2 rounded-full mt-1.5 ${
-                              item.menuItem.isVeg ? 'bg-emerald-500' : 'bg-red-500'
-                            }`}
-                          />
-                        </div>
-                      ))}
+                      <div
+                        className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold ${
+                          isUrgent
+                            ? 'bg-red-500 text-white animate-pulse'
+                            : isDark
+                            ? 'bg-zinc-950 text-amber-400 border border-zinc-800'
+                            : 'bg-slate-100 text-amber-600 border border-slate-300'
+                        }`}
+                      >
+                        <Clock className="w-3.5 h-3.5" />
+                        <span>{minutesAgo}m ago</span>
+                      </div>
                     </div>
 
                     {order.notes && (
-                      <div className="p-2.5 bg-red-950/40 border border-red-800/40 rounded-xl text-xs text-red-300 font-medium">
-                        <strong>Kitchen Special Notes:</strong> {order.notes}
+                      <div className="p-2 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-500 text-xs font-semibold flex items-center gap-1.5">
+                        <AlertCircle className="w-4 h-4 shrink-0" />
+                        <span>{order.notes}</span>
                       </div>
                     )}
+
+                    <div className="space-y-2 pt-1 divide-y divide-zinc-800/60">
+                      {order.items.map((item) => (
+                        <div key={item.id} className="pt-2 first:pt-0 flex items-start justify-between">
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <span className="w-6 h-6 rounded-md bg-amber-500 text-zinc-950 font-black text-xs flex items-center justify-center">
+                                {item.quantity}x
+                              </span>
+                              <span className="font-extrabold text-sm">{item.menuItem.name}</span>
+                            </div>
+                            {item.notes && (
+                              <span className="block text-[11px] text-red-400 font-medium ml-8">
+                                Note: {item.notes}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
-                  {/* Action Buttons */}
-                  <div className="p-4 bg-zinc-950 border-t border-zinc-800">
+                  <div className="pt-2 border-t border-zinc-800/80">
                     {order.status === 'PENDING' && (
                       <button
                         onClick={() => handleUpdateStatus(order.id, 'PREPARING')}
-                        className="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20"
+                        className="w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-amber-500/20"
                       >
-                        <Play className="w-4 h-4 fill-zinc-950" />
-                        <span>Start Cooking</span>
+                        <Flame className="w-4 h-4" /> Start Cooking
                       </button>
                     )}
 
                     {order.status === 'PREPARING' && (
                       <button
                         onClick={() => handleUpdateStatus(order.id, 'READY')}
-                        className="w-full py-3 rounded-xl bg-blue-500 hover:bg-blue-400 text-zinc-950 font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20"
+                        className="w-full py-2.5 rounded-xl bg-blue-500 hover:bg-blue-400 text-zinc-950 font-bold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-blue-500/20"
                       >
-                        <CheckCircle2 className="w-4 h-4" />
-                        <span>Mark Order Plated & Ready</span>
+                        <CheckCircle2 className="w-4 h-4" /> Mark Plated & Ready
                       </button>
                     )}
 
                     {order.status === 'READY' && (
                       <button
                         onClick={() => handleUpdateStatus(order.id, 'SERVED')}
-                        className="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
+                        className="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-emerald-500/20"
                       >
-                        <CheckCircle2 className="w-4 h-4" />
-                        <span>Mark Order Served</span>
+                        <CheckCircle2 className="w-4 h-4" /> Served to Guest
                       </button>
                     )}
                   </div>
