@@ -14,7 +14,7 @@ export default function NavigationHeader() {
   const isDark = theme === 'dark';
 
   const links = [
-    { name: t('customerMenu'), href: '/table/1', icon: UtensilsCrossed, badge: 'QR Scan' },
+    { name: 'Customer Tables', href: '/table', icon: UtensilsCrossed, badge: 'All Tables' },
     { name: t('kitchenKds'), href: '/kitchen', icon: ChefHat, badge: 'Live Tickets' },
     { name: t('staffFloor'), href: '/staff', icon: UserCheck, badge: 'Waiters' },
     { name: t('adminPortal'), href: '/admin', icon: Settings, badge: 'Menu & Stock' },
@@ -55,14 +55,14 @@ export default function NavigationHeader() {
           <nav className="hidden md:flex items-center gap-1">
             {links.map((link) => {
               const Icon = link.icon;
-              const isActive = pathname.startsWith(link.href) && (link.href !== '/' || pathname === '/');
+              const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
               return (
                 <Link
                   key={link.href}
                   href={link.href}
                   className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
                     isActive
-                      ? 'bg-amber-500/10 text-amber-500 border border-amber-500/30'
+                      ? 'bg-amber-500/10 text-amber-500 border border-amber-500/30 font-bold'
                       : isDark
                       ? 'text-zinc-400 hover:text-white hover:bg-zinc-800/60'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
@@ -123,7 +123,7 @@ export default function NavigationHeader() {
             </div>
 
             <Link
-              href="/table/1"
+              href="/table"
               className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 text-xs font-bold transition-all shadow-md shadow-amber-500/20"
             >
               <UtensilsCrossed className="w-3.5 h-3.5" />
@@ -141,7 +141,7 @@ export default function NavigationHeader() {
       >
         {links.map((link) => {
           const Icon = link.icon;
-          const isActive = pathname.startsWith(link.href);
+          const isActive = pathname === link.href;
           return (
             <Link
               key={link.href}
