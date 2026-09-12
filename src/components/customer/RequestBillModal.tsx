@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useLanguageStore } from '@/store/useLanguageStore';
+import { useThemeStore } from '@/store/useThemeStore';
 import { CreditCard, Banknote, QrCode, X, CheckCircle2, Receipt } from 'lucide-react';
 
 interface RequestBillModalProps {
@@ -13,6 +14,9 @@ interface RequestBillModalProps {
 
 export default function RequestBillModal({ isOpen, onClose, tableId, totalAmount }: RequestBillModalProps) {
   const { t } = useLanguageStore();
+  const { theme } = useThemeStore();
+  const isDark = theme === 'dark';
+
   const [paymentMethod, setPaymentMethod] = useState<'CARD' | 'CASH' | 'UPI'>('CARD');
   const [splitCount, setSplitCount] = useState<number>(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -47,68 +51,92 @@ export default function RequestBillModal({ isOpen, onClose, tableId, totalAmount
 
   return (
     <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="w-full max-w-sm bg-zinc-900 border border-zinc-800 rounded-2xl p-5 text-white space-y-4 shadow-2xl relative">
+      <div
+        className={`w-full max-w-sm border rounded-2xl p-5 space-y-4 shadow-2xl relative transition-colors ${
+          isDark ? 'bg-zinc-900 border-zinc-800 text-white' : 'bg-white border-slate-200 text-slate-900'
+        }`}
+      >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-zinc-500 hover:text-white p-1 rounded-lg hover:bg-zinc-800"
+          className={`absolute top-4 right-4 p-1 rounded-lg transition-colors ${
+            isDark ? 'text-zinc-500 hover:text-white hover:bg-zinc-800' : 'text-slate-400 hover:text-slate-900 hover:bg-slate-100'
+          }`}
         >
           <X className="w-5 h-5" />
         </button>
 
         {requestSent ? (
           <div className="text-center py-6 space-y-3">
-            <CheckCircle2 className="w-12 h-12 text-amber-400 mx-auto animate-bounce" />
-            <h3 className="text-lg font-bold text-amber-400">{t('billRequested')}</h3>
-            <p className="text-xs text-zinc-400">
+            <CheckCircle2 className="w-12 h-12 text-amber-500 mx-auto animate-bounce" />
+            <h3 className="text-lg font-bold text-amber-500">{t('billRequested')}</h3>
+            <p className={`text-xs ${isDark ? 'text-zinc-400' : 'text-slate-500'}`}>
               {t('serverBringingBill')} <strong>₹{totalAmount.toFixed(0)}</strong>
             </p>
           </div>
         ) : (
           <>
             <div className="flex items-center gap-2">
-              <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+              <div className="p-2 rounded-xl bg-amber-500/10 text-amber-500 border border-amber-500/20">
                 <Receipt className="w-5 h-5" />
               </div>
               <div>
                 <h3 className="font-bold text-base">{t('requestTableBill')}</h3>
-                <p className="text-xs text-zinc-400">{t('selectPayment')}</p>
+                <p className={`text-xs ${isDark ? 'text-zinc-400' : 'text-slate-500'}`}>{t('selectPayment')}</p>
               </div>
             </div>
 
             {/* Total summary */}
-            <div className="p-3 bg-zinc-950 rounded-xl border border-zinc-800/80 flex items-center justify-between">
-              <span className="text-xs text-zinc-400 font-medium">{t('totalBillAmount')}</span>
-              <span className="text-xl font-black text-amber-400">₹{totalAmount.toFixed(0)}</span>
+            <div
+              className={`p-3 rounded-xl border flex items-center justify-between ${
+                isDark ? 'bg-zinc-950 border-zinc-800/80' : 'bg-slate-50 border-slate-200'
+              }`}
+            >
+              <span className={`text-xs font-medium ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>
+                {t('totalBillAmount')}
+              </span>
+              <span className="text-xl font-black text-amber-500">₹{totalAmount.toFixed(0)}</span>
             </div>
 
             {/* Split bill calculator */}
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-zinc-400">{t('splitBill')}</label>
-              <div className="flex items-center justify-between bg-zinc-950 p-2 rounded-xl border border-zinc-800">
+              <label className={`text-xs font-semibold ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>
+                {t('splitBill')}
+              </label>
+              <div
+                className={`flex items-center justify-between p-2 rounded-xl border ${
+                  isDark ? 'bg-zinc-950 border-zinc-800' : 'bg-slate-50 border-slate-200'
+                }`}
+              >
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => setSplitCount((prev) => Math.max(1, prev - 1))}
-                    className="w-7 h-7 rounded-lg bg-zinc-800 hover:bg-zinc-700 font-bold text-sm"
+                    className={`w-7 h-7 rounded-lg font-bold text-sm ${
+                      isDark ? 'bg-zinc-800 hover:bg-zinc-700' : 'bg-slate-200 hover:bg-slate-300'
+                    }`}
                   >
                     -
                   </button>
                   <span className="text-sm font-bold w-6 text-center">{splitCount}</span>
                   <button
                     onClick={() => setSplitCount((prev) => prev + 1)}
-                    className="w-7 h-7 rounded-lg bg-zinc-800 hover:bg-zinc-700 font-bold text-sm"
+                    className={`w-7 h-7 rounded-lg font-bold text-sm ${
+                      isDark ? 'bg-zinc-800 hover:bg-zinc-700' : 'bg-slate-200 hover:bg-slate-300'
+                    }`}
                   >
                     +
                   </button>
                 </div>
-                <span className="text-xs text-zinc-300 font-semibold">
-                  ₹{perPerson.toFixed(0)} <span className="text-zinc-500 font-normal">/ {t('person')}</span>
+                <span className="text-xs font-semibold">
+                  ₹{perPerson.toFixed(0)} <span className={`font-normal ${isDark ? 'text-zinc-500' : 'text-slate-400'}`}>/ {t('person')}</span>
                 </span>
               </div>
             </div>
 
             {/* Payment Method Selector */}
             <div className="space-y-2">
-              <label className="text-xs font-semibold text-zinc-400">{t('paymentOption')}</label>
+              <label className={`text-xs font-semibold ${isDark ? 'text-zinc-400' : 'text-slate-600'}`}>
+                {t('paymentOption')}
+              </label>
               <div className="grid grid-cols-3 gap-2">
                 {[
                   { id: 'CARD', label: t('cardPos'), icon: CreditCard },
@@ -123,8 +151,10 @@ export default function RequestBillModal({ isOpen, onClose, tableId, totalAmount
                       onClick={() => setPaymentMethod(pm.id as 'CARD' | 'CASH' | 'UPI')}
                       className={`p-2.5 rounded-xl border text-center transition-all flex flex-col items-center gap-1 ${
                         isSelected
-                          ? 'bg-amber-500/10 border-amber-500/50 text-amber-400 font-bold'
-                          : 'bg-zinc-950 border-zinc-800 text-zinc-400 hover:text-zinc-200'
+                          ? 'bg-amber-500/10 border-amber-500/50 text-amber-500 font-bold'
+                          : isDark
+                          ? 'bg-zinc-950 border-zinc-800 text-zinc-400 hover:text-zinc-200'
+                          : 'bg-slate-50 border-slate-200 text-slate-600 hover:text-slate-900'
                       }`}
                     >
                       <Icon className="w-4 h-4" />
