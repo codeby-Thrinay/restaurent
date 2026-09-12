@@ -2,12 +2,16 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { UtensilsCrossed, ChefHat, UserCheck, Settings, BarChart3, QrCode, Globe } from 'lucide-react';
+import { UtensilsCrossed, ChefHat, UserCheck, Settings, BarChart3, QrCode, Sun, Moon } from 'lucide-react';
 import { useLanguageStore } from '@/store/useLanguageStore';
+import { useThemeStore } from '@/store/useThemeStore';
 
 export default function NavigationHeader() {
   const pathname = usePathname();
   const { language, setLanguage, t } = useLanguageStore();
+  const { theme, toggleTheme } = useThemeStore();
+
+  const isDark = theme === 'dark';
 
   const links = [
     { name: t('customerMenu'), href: '/table/1', icon: UtensilsCrossed, badge: 'QR Scan' },
@@ -19,7 +23,13 @@ export default function NavigationHeader() {
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-zinc-950/90 backdrop-blur-md border-b border-zinc-800 text-white">
+    <header
+      className={`sticky top-0 z-40 backdrop-blur-md border-b transition-colors ${
+        isDark
+          ? 'bg-zinc-950/90 border-zinc-800 text-white'
+          : 'bg-white/90 border-slate-200 text-slate-900 shadow-sm'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo Brand */}
@@ -28,10 +38,14 @@ export default function NavigationHeader() {
               <UtensilsCrossed className="w-5 h-5" />
             </div>
             <div>
-              <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-amber-200 via-amber-400 to-amber-100 bg-clip-text text-transparent">
+              <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 bg-clip-text text-transparent">
                 DinePulse
               </span>
-              <span className="block text-[10px] uppercase font-semibold text-zinc-400 -mt-1 tracking-widest">
+              <span
+                className={`block text-[10px] uppercase font-semibold -mt-1 tracking-widest ${
+                  isDark ? 'text-zinc-400' : 'text-slate-500'
+                }`}
+              >
                 {t('digitalDining')}
               </span>
             </div>
@@ -48,25 +62,48 @@ export default function NavigationHeader() {
                   href={link.href}
                   className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
                     isActive
-                      ? 'bg-amber-500/10 text-amber-400 border border-amber-500/30'
-                      : 'text-zinc-400 hover:text-white hover:bg-zinc-800/60'
+                      ? 'bg-amber-500/10 text-amber-500 border border-amber-500/30'
+                      : isDark
+                      ? 'text-zinc-400 hover:text-white hover:bg-zinc-800/60'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                   }`}
                 >
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-amber-400' : 'text-zinc-400'}`} />
+                  <Icon className={`w-4 h-4 ${isActive ? 'text-amber-500' : isDark ? 'text-zinc-400' : 'text-slate-500'}`} />
                   <span>{link.name}</span>
                 </Link>
               );
             })}
           </nav>
 
-          {/* Language Toggle & Quick Demo Switcher */}
+          {/* Controls: Theme Toggle + Language Switcher */}
           <div className="flex items-center gap-2">
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className={`p-2 rounded-xl border transition-all flex items-center justify-center ${
+                isDark
+                  ? 'bg-zinc-900 border-zinc-800 text-amber-400 hover:bg-zinc-800'
+                  : 'bg-slate-100 border-slate-200 text-amber-600 hover:bg-slate-200'
+              }`}
+              title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            >
+              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4 text-zinc-700" />}
+            </button>
+
             {/* Language Switcher */}
-            <div className="flex items-center bg-zinc-900 border border-zinc-800 p-1 rounded-xl">
+            <div
+              className={`flex items-center p-1 rounded-xl border ${
+                isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-slate-100 border-slate-200'
+              }`}
+            >
               <button
                 onClick={() => setLanguage('en')}
                 className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
-                  language === 'en' ? 'bg-amber-500 text-zinc-950 shadow-md' : 'text-zinc-400 hover:text-white'
+                  language === 'en'
+                    ? 'bg-amber-500 text-zinc-950 shadow-md'
+                    : isDark
+                    ? 'text-zinc-400 hover:text-white'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 🇬🇧 EN
@@ -74,7 +111,11 @@ export default function NavigationHeader() {
               <button
                 onClick={() => setLanguage('hi')}
                 className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
-                  language === 'hi' ? 'bg-amber-500 text-zinc-950 shadow-md' : 'text-zinc-400 hover:text-white'
+                  language === 'hi'
+                    ? 'bg-amber-500 text-zinc-950 shadow-md'
+                    : isDark
+                    ? 'text-zinc-400 hover:text-white'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 🇮🇳 हिंदी
@@ -93,7 +134,11 @@ export default function NavigationHeader() {
       </div>
 
       {/* Mobile Links Bar */}
-      <div className="md:hidden flex items-center justify-around bg-zinc-900 border-t border-zinc-800 px-2 py-2 text-[10px]">
+      <div
+        className={`md:hidden flex items-center justify-around border-t px-2 py-2 text-[10px] ${
+          isDark ? 'bg-zinc-900 border-zinc-800' : 'bg-slate-100 border-slate-200'
+        }`}
+      >
         {links.map((link) => {
           const Icon = link.icon;
           const isActive = pathname.startsWith(link.href);
@@ -102,7 +147,7 @@ export default function NavigationHeader() {
               key={link.href}
               href={link.href}
               className={`flex flex-col items-center gap-0.5 p-1 rounded ${
-                isActive ? 'text-amber-400 font-bold' : 'text-zinc-400'
+                isActive ? 'text-amber-500 font-bold' : isDark ? 'text-zinc-400' : 'text-slate-600'
               }`}
             >
               <Icon className="w-4 h-4" />
